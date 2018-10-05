@@ -52,3 +52,16 @@ How many distinct stations serve the A train? Of the stations that serve the A t
 Of the stations that serve the A train, `r nrow(filter(distinct_tidy, route_name == "A", ada == TRUE))` are ADA compliant.
 
 ## Problem 2
+Read and clean the Mr.Trash Wheel sheet:
+```{r clean_mr_trash}
+library(readxl)
+library(cellranger)
+mr_trash_data = 
+  read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 1,
+             range = cell_cols("A:N")) %>% 
+  janitor::clean_names() %>%  
+  filter(!is.na(dumpster), !is.na(date)) %>% 
+  mutate(sports_balls = round(sports_balls), 
+         sports_balls = as.integer(sports_balls))
+mr_trash_data
+```

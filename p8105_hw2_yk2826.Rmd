@@ -129,3 +129,17 @@ brfss_data =
   mutate(prop_exc_vg = excellent + very_good)
 brfss_data
 ```
+
+1）How many unique locations are included in the dataset? Is every state represented? What state is observed the most?
+```{r }
+unique_location = distinct(brfss_data, county, .keep_all = TRUE) 
+state_frequency = count(brfss_data, state) %>% 
+  arrange(desc(n))
+state_frequency
+nrow(state_frequency)
+```
+`r nrow(unique_location)` unique locations are included in the dataset.
+From state_frequency, we can see every state is represented. NJ is observed the most with 146 observations.
+
+2）In 2002, what is the median of the “Excellent” response value?  
+In 2002, the median of the "Excellent" response value is `r median(filter(brfss_data, year == 2002)$excellent, na.rm = TRUE)`.

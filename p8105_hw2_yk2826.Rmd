@@ -39,3 +39,15 @@ There are `r nrow(filter(distinct_data, ada == TRUE))` stations are ADA complian
 What proportion of station entrances / exits without vending allow entrance?  
 The proportion of station entrances / exits without vending allow entrance is 
 `r nrow(filter(subway_data, entry == TRUE, vending == "NO")) / nrow(filter(subway_data, vending == "NO"))`
+
+Reformat data so that route number and route name are distinct variables. 
+```{r reformat}
+distinct_tidy = gather(distinct_data, key = route_number, value = route_name, 
+                       route1:route11, na.rm = TRUE)
+distinct_tidy
+```
+How many distinct stations serve the A train? Of the stations that serve the A train, how many are ADA compliant?
+
+`r nrow(filter(distinct_tidy, route_name == "A"))` distinct stations serve the A train.  
+Of the stations that serve the A train, `r nrow(filter(distinct_tidy, route_name == "A", ada == TRUE))` are ADA compliant.
+

@@ -92,3 +92,16 @@ precipitation_data =
   mutate(month = month.name[month])
 precipitation_data
 ```
+
+The number of observations in "mr_trash_data" is `r nrow(mr_trash_data)`.
+The number of observations in "precipitation_data" is `r nrow(precipitation_data)`.
+
+Examples of key variables:  
+"mr_trash_data" contains the weight and volume of trash dumped into the dumpster, and the amount of different kinds of trash (such as plastic bottles, polystyrene, cigarette butts, glass bottles, grocery bags, chip bags and sports balls) the dumpster contained. "mr_trash_data" also contains the number of homes powered by the electricity made from those trash.  
+"precipitation_data" contains the total percipitation of each month in 2016 and 2017.  
+The key variable in "mr_trash_data" is the squence number of the dempster.
+The key variable in "precipitation_data" is total percipitation of the month. 
+
+The total precipitation in 2017 is `r sum(precipitation_2017$total)`.
+The median number of sports balls in a dumpster in 2016 is
+`r median(filter(mr_trash_data, year == 2016)$sports_balls, na.rm = TRUE)`.

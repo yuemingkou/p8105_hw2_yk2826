@@ -65,3 +65,22 @@ mr_trash_data =
          sports_balls = as.integer(sports_balls))
 mr_trash_data
 ```
+
+Read and clean precipitation data for 2016 and 2017:
+```{r clean_precipitation}
+precipitation_2016 =
+  read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 5,
+             range = "A2:B14") %>% 
+  janitor::clean_names() %>% 
+  filter(!is.na(total)) %>% 
+  mutate(year = "2016")
+precipitation_2016
+
+precipitation_2017 =
+  read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 4,
+             range = "A2:B14") %>% 
+  janitor::clean_names() %>% 
+  filter(!is.na(total)) %>% 
+  mutate(year = "2017")
+precipitation_2017
+```

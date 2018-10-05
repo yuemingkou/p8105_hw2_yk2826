@@ -24,3 +24,18 @@ The dataset contains the line, station's name, the latitude and longitude of the
 My data cleaning steps so far include: load the data by using "read_csv" function, clean up the column names using "janitor::clean_names", select columns that I want to keep, and convert the entry variable from character to a logical variable using "recode" function.  
 The dimension (rows x columns) of the resulting dataset is `r dim(subway_data)`.  
 These data are not tidy: the route number is spread across 11 columns.
+
+Answer the following questions using these data:
+
+```{r create_distinct_data}
+distinct_data = distinct(subway_data, line, station_name, .keep_all = TRUE)
+```
+How many distinct stations are there?  
+There are `r nrow(distinct_data)` distinct stations.
+
+How many stations are ADA compliant?  
+There are `r nrow(filter(distinct_data, ada == TRUE))` stations are ADA compliant.
+
+What proportion of station entrances / exits without vending allow entrance?  
+The proportion of station entrances / exits without vending allow entrance is 
+`r nrow(filter(subway_data, entry == TRUE, vending == "NO")) / nrow(filter(subway_data, vending == "NO"))`
